@@ -1,0 +1,23 @@
+NAME="sl"
+VERSION=5.02
+RELEASE=1
+CATEGORY="Games"
+SUMMARY="Cure for mistyping 'ls'"
+DESCRIPTION="SL (Steam Locomotive) runs across your terminal when you type 'sl'
+as you meant to type 'ls'. It's just a joke command, and not useful at all."
+HOMEPAGE="http://www.tkl.iis.u-tokyo.ac.jp/~toyoda/index_e.html"
+SRC_URI="https://github.com/mtoyoda/sl/archive/${VERSION}/sl-${VERSION}.tar.gz"
+
+src_compile() {
+	lndirs
+	cd ${B}
+	cygmake CFLAGS="${CFLAGS}"
+}
+
+src_install() {
+	cd ${B}
+	dobin sl.exe
+	doman sl.1
+	newman -l ja sl.1.ja sl.1
+	dodoc README*
+}
